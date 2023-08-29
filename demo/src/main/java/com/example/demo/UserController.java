@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserController {
 	private final UserService userService;
 	private final UserPostService userPostService;
-	
+
 	@Autowired
 	public UserController(UserService userService, UserPostService userPostService) {
 		this.userService = userService;
@@ -132,50 +132,27 @@ public class UserController {
         	User user = userService.getUserByEmail(email);
         	ObjectId userId = user.getId();
         	String userName = user.getUserName();
-        	
-            String imageUrl = userPostService.storeImage(image); // Store image and get URL
-            
+
+            String imageUrl = userPostService.storeImage(image);
+
             UserPost newPost = new UserPost();
-//            newPost.set
             newPost.setDate(date);
             newPost.setCaption(caption);
             newPost.setUserName(userName);
             newPost.setImage(imageUrl);
-            
-            
-//            newPost.setEmail(email);
+
             newPost.setUserId(userId);
             userPostService.adddPost(newPost);
-            
+
             return ResponseEntity.status(HttpStatus.CREATED).body("Post added successfully");
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding post");
         }
     }
-	
+
 	@PostMapping("/chatease/like")
 	public ResponseEntity<String> userLike(@RequestBody String email){
-		
-		return null;
-		
-	}
 
-//    private String storeImage(MultipartFile image) throws IOException {
-//        // Define the storage directory or use your preferred storage solution
-//        Path storagePath = Path.of("C://CHATEASE//frontend//src//media/"); // Replace with actual path
-//
-//        // Generate a unique file name
-//        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-//
-//        // Combine the storage path with the file name
-//        Path targetPath = storagePath.resolve(fileName);
-//
-//        // Copy the uploaded image to the target storage location
-//        Files.copy(image.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
-//
-//        // Return the URL to the stored image (you can format it as needed)
-//        return fileName;
-//    }
-	
-	
+		return null;
+	}
 }

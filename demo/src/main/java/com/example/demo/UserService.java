@@ -33,7 +33,7 @@ public class UserService {
 		User user = userRepository.findByEmail(email);
 		return user;
 	}
-	
+
 }
 
 @Service
@@ -71,5 +71,3 @@ class UserPostService {
         return fileName;
     }
 }
-
-//testing
